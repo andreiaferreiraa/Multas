@@ -281,7 +281,20 @@ namespace Multas1.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", String.Format("Nao é possvel apagar o Agente nº {0} - {1}, porque há multas associadas a ele", id, agente.Nome));
-              
+                
+                /// se existir uma classe chamada 'Erro.cs'
+                /// iremos nela registar os dados do erro
+                ///  -criar um objeto dessa classe
+                ///  -atribuir a esse objeto os dados do erro
+                ///    -nome do controller
+                ///    -nome do metodo
+                ///    -data + hora do erro
+                ///    -mensagem de erro(ex)
+                ///    -dados que se tentavam inserir
+                ///    -outros dados considrados relevantes
+                ///  -guaradar o objeto na BD
+                ///  -notificar um gestor do sistema, por email, ou por outro meio, da ocorrencia do erro e dos seus dados
+                 
             }
             //se cheguei aqui é pq houve problema
             //devolvo os dados do Agente a view

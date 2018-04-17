@@ -4,11 +4,10 @@
     ViewBag.Title = "Agentes";
 }
 
-<h2>Delete</h2>
+<h2>Agentes</h2>
 
 <h3>Quer mesmo apagar este Agente?</h3>
 <div>
-    <h4>Agentes</h4>
     <hr />
     @* HTML Helper para apresentar mensagens de erro*@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -23,13 +22,15 @@
 
         <dt>
             @Html.DisplayNameFor(model => model.Fotografia)
-        </dt>
-
-        <dd>
             @*Html.DisplayFor(modelItem => agente.Fotografia)*@
             <a href="~/imagens/@Model.Fotografia" target="_blank">
                 <img src="~/imagens/@Model.Fotografia" width="50" height="37" />
             </a>
+        </dt>
+
+        <dd>
+            @Html.DisplayNameFor(model => model.Fotografia)
+
         </dd>
 
         <dt>
