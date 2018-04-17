@@ -29,23 +29,23 @@ namespace Multas1.Models
         //*****************************************************************//
         //               construcao das chaves forasteiras                  //
         //*******************************************************************//
-        //----> EM SQL: ForeignKey NomeAtributoQueÉFK references TABELA(pkDaTabela)
+        //----> EM SQL: ForeignKey NomeAtributoQueÉFK references TABELA(pk DaTabela)
         //EM C#:
 
         //FK Agentes
         [ForeignKey("Agente")]
-        public int AgenteFk { get; set; }
+        public int AgenteFK { get; set; }
         public virtual Agentes Agente { get; set; }
 
 
         //FKCondutores
         [ForeignKey("Condutor")]
-        public int CondutorFk { get; set; }
+        public int CondutorFK { get; set; }
         public virtual Condutores Condutor { get; set; }
 
         //FKViasturas
         [ForeignKey("Viatura")]
-        public int ViaturasFK { get; set; }
+        public int ViaturaFK { get; set; }
         public virtual Viaturas Viatura { get; set; }
 
 

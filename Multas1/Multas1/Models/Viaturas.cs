@@ -17,7 +17,7 @@ namespace Multas1.Models
         public int ID { get; set; } //primary key
 
         //dados especificos da viatura
-        public string IMatricula { get; set; }
+        public string Matricula { get; set; }
 
         public string Marca { get; set; }
 
