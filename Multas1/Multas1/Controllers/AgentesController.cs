@@ -134,6 +134,7 @@ namespace Multas1.Controllers
             }
 
             //verifica se o ficheiro é realmente uma imagem --> TPC
+            //if(fileUploadFotografia == {}
             //redimensionar a imagem --> TPC
             //escrever a fotografia no disco rigido
 
@@ -268,13 +269,25 @@ namespace Multas1.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             //procura o Agente
-            Agentes agentes = db.Agentes.Find(id);
-            //remove da memória
-            db.Agentes.Remove(agentes);
-            //commit na bd
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            Agentes agente = db.Agentes.Find(id);
+            try {
+                
+                //remove da memória
+                db.Agentes.Remove(agente);
+                //commit na bd
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", String.Format("Nao é possvel apagar o Agente nº {0} - {1}, porque há multas associadas a ele", id, agente.Nome));
+              
+            }
+            //se cheguei aqui é pq houve problema
+            //devolvo os dados do Agente a view
+            return View(agente);
         }
+    
 
         protected override void Dispose(bool disposing)
         {
