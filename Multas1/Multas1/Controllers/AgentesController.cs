@@ -97,7 +97,20 @@ namespace Multas1.Controllers
                                     HttpPostedFileBase fileUploadFotografia)
         {
             //determinar o ID do novo Agente
-            int novoID = db.Agentes.Max(a => a.ID) + 1;
+            //testar se ha registos na tabela dos Agentes
+            //count devolve o numero de registos
+            // if (db.Agentes.Count()!=0)  {}  //count devolve o numero de registos
+
+            //ou entao, usar a instrucao TRY/CATCH
+            var novoID = 0;
+            try
+            {
+                novoID=db.Agentes.Max(a => a.ID) + 1;
+            }
+            catch (Exception)
+            {
+                novoID = 1;
+            }
 
             //atribuir o ID ao novo agente
             agente.ID = novoID;
@@ -130,17 +143,28 @@ namespace Multas1.Controllers
             //do modelo, rejeita os dados
             if (ModelState.IsValid)
             {
-                //adiciona na estrutura de dados, na memória do servidor, o objeto Agentes
-                db.Agentes.Add(agente);
-                //faz "commit"
-                db.SaveChanges();
-                //guardar a imagem no disco rigido
-                fileUploadFotografia.SaveAs(caminhoParaFoto);
+                try
+                {
 
-                //redireciona o utilizadora para a página de inicio 
-                return RedirectToAction("Index");
+                    //adiciona na estrutura de dados, na memória do servidor, o objeto Agentes
+                    db.Agentes.Add(agente);
+                    //faz "commit"
+                    db.SaveChanges();
+                    //guardar a imagem no disco rigido
+                    fileUploadFotografia.SaveAs(caminhoParaFoto);
+
+                    //redireciona o utilizadora para a página de inicio 
+                    return RedirectToAction("Index");
+                }
+
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", "Houve um erro na criacao de um novo agente");
+                }
             }
 
+            //se houver um erro
+            //reapresenta os dados de agente na view
             return View(agente);
         }
 
